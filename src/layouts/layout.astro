@@ -9,6 +9,7 @@ import Nav from "../components/nav.astro";
 
 const { light, dark, radius } = CONFIG.theme;
 const { baseFontSize } = CONFIG.typography;
+const { title } = Astro.props;
 ---
 
 <html
@@ -93,8 +94,8 @@ const { baseFontSize } = CONFIG.typography;
     <div class="relative z-10 max-w-2xl mx-auto py-12 pb-24 sm:py-24 px-6">
       <!-- Header -->
       <header class="mb-12">
-        <h1 class="text-4xl font-bold mb-2">{CONFIG.site.title || "Colton Ward"}</h1>
-        <p class="text-lg text-muted-foreground">{CONFIG.site.description || "Applied Math Student"}</p>
+        <h1 class="text-4xl font-bold mb-2">{CONFIG.site.title}</h1>
+        <p class="text-lg text-muted-foreground">{CONFIG.site.description}</p>
       </header>
 
       <!-- About Section -->
