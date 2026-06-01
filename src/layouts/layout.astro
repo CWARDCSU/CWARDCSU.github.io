@@ -7,14 +7,6 @@ import { about } from "../data/about";
 import { CONFIG } from "../data/config";
 import Nav from "../components/nav.astro";
 
-interface Props {
-  title?: string;
-}
-
-const {
-  title,
-} = Astro.props;
-
 const { light, dark, radius } = CONFIG.theme;
 const { baseFontSize } = CONFIG.typography;
 ---
@@ -131,7 +123,7 @@ const { baseFontSize } = CONFIG.typography;
                 {job.skills && job.skills.length > 0 && (
                   <div class="mt-3 flex flex-wrap gap-2">
                     {job.skills.map((skill) => (
-                      <span class="text-xs bg-secondary text-secondary-foreground px-2 py-1 rounded">
+                      <span class="rounded-lg border border-secondary-foreground px-3 py-1 text-xs">
                         {skill}
                       </span>
                     ))}
