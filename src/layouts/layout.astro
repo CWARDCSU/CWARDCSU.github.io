@@ -1,0 +1,207 @@
+---
+import "../styles/global.css";
+import { education } from "../data/education";
+import { experience } from "../data/experience";
+import { projects } from "../data/projects";
+import { about } from "../data/about";
+import { CONFIG } from "../data/config";
+import Nav from "../components/nav.astro";
+
+interface Props {
+  title?: string;
+}
+
+const {
+  title,
+} = Astro.props;
+
+const { light, dark, radius } = CONFIG.theme;
+const { baseFontSize } = CONFIG.typography;
+---
+
+<html
+  lang={CONFIG.site.locale.split("_")[0]}
+  style={`font-size: ${baseFontSize}%;`}
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <script is:inline>
+      (function () {
+        try {
+          var theme = localStorage.getItem("theme");
+          if (
+            theme === "dark" ||
+            (!theme &&
+              window.matchMedia("(prefers-color-scheme: dark)").matches)
+          ) {
+            document.documentElement.classList.add("dark");
+            document.documentElement.setAttribute('data-theme', 'default-dark');
+          } else {
+            document.documentElement.classList.remove("dark");
+            document.documentElement.setAttribute('data-theme', 'default-light');
+          }
+        } catch (_) {}
+      })();
+    </script>
+
+    <!-- Theme variables from config.ts -->
+    <style
+      set:html={`
+      :root {
+        --radius: ${radius};
+        --background: ${light.background};
+        --foreground: ${light.foreground};
+        --card: ${light.card};
+        --card-foreground: ${light.cardForeground};
+        --popover: ${light.popover};
+        --popover-foreground: ${light.popoverForeground};
+        --primary: ${light.primary};
+        --primary-foreground: ${light.primaryForeground};
+        --secondary: ${light.secondary};
+        --secondary-foreground: ${light.secondaryForeground};
+        --muted: ${light.muted};
+        --muted-foreground: ${light.mutedForeground};
+        --accent: ${light.accent};
+        --accent-foreground: ${light.accentForeground};
+        --destructive: ${light.destructive};
+        --border: ${light.border};
+        --input: ${light.input};
+        --ring: ${light.ring};
+      }
+      .dark {
+        --background: ${dark.background};
+        --foreground: ${dark.foreground};
+        --card: ${dark.card};
+        --card-foreground: ${dark.cardForeground};
+        --popover: ${dark.popover};
+        --popover-foreground: ${dark.popoverForeground};
+        --primary: ${dark.primary};
+        --primary-foreground: ${dark.primaryForeground};
+        --secondary: ${dark.secondary};
+        --secondary-foreground: ${dark.secondaryForeground};
+        --muted: ${dark.muted};
+        --muted-foreground: ${dark.mutedForeground};
+        --accent: ${dark.accent};
+        --accent-foreground: ${dark.accentForeground};
+        --destructive: ${dark.destructive};
+        --border: ${dark.border};
+        --input: ${dark.input};
+        --ring: ${dark.ring};
+      }
+    `}
+    ></style>
+
+
+  </head>
+  <body class="min-h-screen bg-background font-sans antialiased relative">
+
+    <div class="relative z-10 max-w-2xl mx-auto py-12 pb-24 sm:py-24 px-6">
+      <!-- Header -->
+      <header class="mb-12">
+        <h1 class="text-4xl font-bold mb-2">{CONFIG.site.title || "Colton Ward"}</h1>
+        <p class="text-lg text-muted-foreground">{CONFIG.site.description || "Applied Math Student"}</p>
+      </header>
+
+      <!-- About Section -->
+      {about.paragraphs && about.paragraphs.length > 0 && (
+        <section class="mb-12">
+          <h2 class="text-2xl font-semibold mb-4">About</h2>
+          <div class="space-y-3">
+            {about.paragraphs.map((paragraph) => (
+              <p class="text-muted-foreground">{paragraph}</p>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- Experience Section -->
+      {experience && experience.length > 0 && (
+        <section class="mb-12">
+          <h2 class="text-2xl font-semibold mb-6">Experience</h2>
+          <div class="space-y-8">
+            {experience.map((job) => (
+              <div class="border-l-2 border-primary pl-6">
+                <h3 class="text-lg font-semibold">{job.role}</h3>
+                <p class="text-sm text-muted-foreground">{job.company}</p>
+                <p class="text-xs text-muted-foreground">{job.start} - {job.end}</p>
+                <p class="mt-2 text-muted-foreground">{job.description}</p>
+                {job.skills && job.skills.length > 0 && (
+                  <div class="mt-3 flex flex-wrap gap-2">
+                    {job.skills.map((skill) => (
+                      <span class="text-xs bg-secondary text-secondary-foreground px-2 py-1 rounded">
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- Education Section -->
+      {education && education.length > 0 && (
+        <section class="mb-12">
+          <h2 class="text-2xl font-semibold mb-6">Education</h2>
+          <div class="space-y-4">
+            {education.map((edu) => (
+              <div class="border-l-2 border-primary pl-6">
+                <h3 class="text-lg font-semibold">{edu.degree}</h3>
+                <p class="text-sm text-muted-foreground">{edu.school}</p>
+                <p class="text-xs text-muted-foreground">{edu.start} - {edu.end}</p>
+                <p class="text-xs text-muted-foreground">{edu.location}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- Projects Section -->
+      {projects && projects.length > 0 && (
+        <section class="mb-12">
+          <h2 class="text-2xl font-semibold mb-6">Projects</h2>
+          <div class="space-y-6">
+            {projects.map((project) => (
+              <div class="border border-border rounded-lg p-4">
+                <div class="flex justify-between items-start mb-2">
+                  <h3 class="text-lg font-semibold">{project.name}</h3>
+                  {project.status && (
+                    <span class="text-xs bg-accent text-accent-foreground px-2 py-1 rounded">
+                      {project.status}
+                    </span>
+                  )}
+                </div>
+                <p class="text-muted-foreground mb-3">{project.description}</p>
+                {project.highlights && project.highlights.length > 0 && (
+                  <ul class="list-disc list-inside text-sm text-muted-foreground mb-3 space-y-1">
+                    {project.highlights.map((highlight) => (
+                      <li>{highlight}</li>
+                    ))}
+                  </ul>
+                )}
+                {project.stack && project.stack.length > 0 && (
+                  <div class="flex flex-wrap gap-2">
+                    {project.stack.map((tech) => (
+                      <span class="text-xs bg-secondary text-secondary-foreground px-2 py-1 rounded">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <!-- Slot for page-specific content -->
+      <slot />
+    </div>
+
+    <Nav />
+  </body>
+</html>
