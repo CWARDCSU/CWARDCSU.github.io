@@ -1,0 +1,29 @@
+:root {
+  --radius: 0.625rem;
+ 
+  /* Light theme */
+  --background: #ffffff;
+  --foreground: #252525;
+  --card: #ffffff;
+  --card-foreground: #252525;
+  --primary: #353535;
+  --primary-foreground: #fafafa;
+  --secondary: #f7f7f7;
+  --secondary-foreground: #353535;
+  --accent: #f7f7f7;
+  --stars: #ffd900;
+  --stars-empty: #000000;
+}
+
+.dark {
+  --background: #000000;
+  --foreground: #fafafa;
+  --card: #353535;
+  --card-foreground: #fafafa;
+  --primary: #ebebeb;
+  --primary-foreground: #353535;
+  --secondary: #444444;
+  --secondary-foreground: #fafafa;
+  --stars: #ffd900;
+  --stars-empty: #d1c6c6;
+}

@@ -1,8 +1,7 @@
 @import "tailwindcss";
+@import "./themes.css";
 
 @layer base {
-  /* Theme variables are injected from config.ts in layout.astro */
-  
   /* Core Element Styles */
   *::selection {
     background-color: var(--accent);
@@ -14,10 +13,17 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: var(--foreground);
-    background-color: var(--background);
+    background: linear-gradient(
+      135deg,    
+      color-mix(in srgb, var(--background), rgb(255, 255, 255) 16%) 0%,
+      var(--background) 70%,
+      color-mix(in srgb, var(--background), rgb(255, 255, 255) 16%) 100%
+    );
+    background-attachment: fixed;
     /* Transition for theme switching */
-    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
     min-height: 100vh;
+    margin-bottom: 100px;
   }
 }
 
@@ -49,7 +55,7 @@
 }
 
 .dock-item:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: color-mix(in srgb, var(--primary), transparent 90%);
   transform: scale(1.1);
 }
 

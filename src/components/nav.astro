@@ -8,19 +8,13 @@ import { Icon } from "astro-icon/components";
   class="fixed bottom-4 left-1/2 -translate-x-1/2
          flex items-center gap-3
          px-4 py-3 rounded-full
-         backdrop-blur-md border border-white/10"
+         backdrop-blur-md border border-secondary-foreground/20"
 >
-  <a href={socials[0].url} target="_blank" class="dock-item">
-    <Icon name="mdi:github" class="w-6 h-6" />
-  </a>
-
-  <a href={socials[1].url} target="_blank" class="dock-item">
-    <Icon name="mdi:linkedin" class="w-6 h-6" />
-  </a>
-
-  <a href={socials[2].url} target="_blank" class="dock-item">
-    <Icon name="mdi:email" class="w-6 h-6" />
-  </a>
+  {socials.map((social) => (
+    <a href={social.url} target="_blank" class="dock-item">
+      <Icon name={social.icon} class="w-6 h-6" />
+    </a>
+  ))}
 
   <ThemeToggle />
 </nav>
