@@ -15,9 +15,9 @@
     color: var(--foreground);
     background: linear-gradient(
       135deg,    
-      color-mix(in srgb, var(--background), rgb(255, 255, 255) 16%) 0%,
-      var(--background) 70%,
-      color-mix(in srgb, var(--background), rgb(255, 255, 255) 16%) 100%
+      color-mix(in srgb, var(--background), rgb(0, 0, 0) 0%) 0%,
+      var(--background) 50%,
+      color-mix(in srgb, var(--background), rgb(255, 255, 255) 30%) 100%
     );
     background-attachment: fixed;
     /* Transition for theme switching */
